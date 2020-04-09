@@ -7,4 +7,4 @@ blueprint = Blueprint('resource_claims', __name__)
 @blueprint.route('/api/resource_claims', methods=(['GET']))
 def get_resource_claims():
     print('hello')
-    return FakedResourceClaimFactory().dump()
+    return {'results': [FakedResourceClaimFactory().dump() for _ in range(10)]}

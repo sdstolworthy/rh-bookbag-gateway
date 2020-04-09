@@ -1,8 +1,14 @@
 from flask_cors import CORS
 from faker import Faker
+from faker.providers import lorem
 
 cors = CORS()
-faker = Faker(['en_US'])
+faker = Faker(['en_US'],
+              providers=[
+                  'faker.providers.misc', 'faker.providers.lorem',
+                  'faker.providers.internet', 'faker.providers.person',
+                  'faker.providers.company'
+              ])
 
 
 class Factory(object):

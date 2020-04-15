@@ -1,31 +1,27 @@
-from marshmallow import (Schema, fields, validate)
 from bookbag.extensions import Factory, faker
+import json
 
 
-class ResourceClaim(Schema):
-    id = fields.Int()
+class ResourceClaim(object):
+    def __init__(self, id=None, current_state=None, name=None, resources=[]):
+        self.id = id
+        self.name = name
+        self.resources = resources
 
-    current_state = fields.String(
-        validate=validate.ContainsOnly(['started', 'stopped']))
+    id = ''
 
-    name = fields.String()
+    current_state = None
 
-    provision_data = fields.Dict(keys=fields.String)
+    name = None
+
+    resources = []
 
 
 class FakedResourceClaimFactory(Factory):
     def __init__(self):
         super().__init__(ResourceClaim(),
                          defaults={
-                             'id':
-                             faker.random_digit(),
-                             'name':
-                             ''.join(faker.words(nb=3)),
-                             'provision_data': {
-                                 'username': faker.ascii_company_email(),
-                                 'password': faker.sha1()
-                             },
-                             'current_state':
-                             faker.random_element(elements=('started',
-                                                            'stopped'))
+                             'id': faker.random_digit(),
+                             'name': ''.join(faker.words(nb=3)),
+                             'resources': [],
                          })

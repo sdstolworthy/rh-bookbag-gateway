@@ -1,6 +1,6 @@
-from flask import current_app, Blueprint, g
+from flask import current_app, Blueprint, Response
+import json
 from bookbag.services.resource_claims import faked_resource_service, backendv1_resource_claim_service
-
 blueprint = Blueprint('resource_claims', __name__)
 
 
@@ -14,4 +14,13 @@ def get_resource_claims():
     resource_service = get_resource_claim_service()
 
     # TODO: reach out to OC to get req info
-    return {'results': resource_service.get_resource_claims()}
+
+    return Response(json.dumps(
+        {
+            'results': [
+                resource_claim
+                for resource_claim in resource_service.get_resource_claims()
+            ]
+        },
+        default=lambda o: o.__dict__),
+                    mimetype='application/json')

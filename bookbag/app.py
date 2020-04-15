@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, g
 from bookbag.settings import DevConfig
 from bookbag.extensions import cors
 from bookbag.transport import resource_claims
+from bookbag.config import FakedConfig, BaseConfig
+import os
 
 
 def create_app(app_config=DevConfig):
@@ -12,6 +14,10 @@ def create_app(app_config=DevConfig):
     cors.init_app(app, origins=origins)
     register_extensions(app)
     register_blueprints(app)
+    if os.environ.get('FLASK_DEBUG') == '1':
+        app.config.from_object(FakedConfig)
+    else:
+        app.config.from_object(BaseConfig)
     return app
 
 
@@ -21,4 +27,4 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    app.register_blueprint(resource_claims.views.blueprint)
+    app.register_blueprint(resource_claims)

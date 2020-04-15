@@ -2,8 +2,11 @@ from flask import Flask, g
 from bookbag.settings import DevConfig
 from bookbag.extensions import cors
 from bookbag.transport import resource_claims
-from bookbag.config import FakedConfig, BaseConfig
+from bookbag.config import FakedConfig, ProductionConfig
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 
 def create_app(app_config=DevConfig):
@@ -15,9 +18,9 @@ def create_app(app_config=DevConfig):
     register_extensions(app)
     register_blueprints(app)
     if os.environ.get('FLASK_DEBUG') == '1':
-        app.config.from_object(FakedConfig)
+        app.config.from_object(ProductionConfig)
     else:
-        app.config.from_object(BaseConfig)
+        app.config.from_object(ProductionConfig)
     return app
 
 

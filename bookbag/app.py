@@ -1,7 +1,7 @@
 from flask import Flask
 from bookbag.settings import DevConfig
 from bookbag.extensions import cors
-from bookbag import resource_claims
+from bookbag.transport import resource_claims
 
 
 def create_app(app_config=DevConfig):

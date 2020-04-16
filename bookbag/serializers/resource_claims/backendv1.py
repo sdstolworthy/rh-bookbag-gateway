@@ -7,7 +7,8 @@ def serialize(o):
                                    current_state='started',
                                    name=o['metadata']['name'],
                                    resources=[
-                                       serialize_resource(resource)
+                                       serialize_resource(
+                                           resource.get('state'))
                                        for resource in o['status']['resources']
                                    ])
     return resource_claim

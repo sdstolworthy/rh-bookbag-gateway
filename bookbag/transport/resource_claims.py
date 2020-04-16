@@ -1,6 +1,8 @@
 from flask import current_app, Blueprint, Response
 import json
-from bookbag.services.resource_claims import faked_resource_service, backendv1_resource_claim_service
+from bookbag.services.resource_claims import backendv1_resource_claim_service
+
+
 blueprint = Blueprint('resource_claims', __name__)
 
 

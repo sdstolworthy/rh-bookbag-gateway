@@ -1,7 +1,7 @@
 from flask import Flask, g
 from bookbag.settings import DevConfig
 from bookbag.extensions import cors
-from bookbag.transport import resource_claims
+from bookbag.transport import resource_claims, resources
 from bookbag.config import FakedConfig, ProductionConfig
 from dotenv import load_dotenv
 import os
@@ -31,3 +31,4 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(resource_claims)
+    app.register_blueprint(resources.blueprint)

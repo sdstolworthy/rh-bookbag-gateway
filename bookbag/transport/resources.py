@@ -16,10 +16,8 @@ def get_resources():
 
     return Response(json.dumps(
         {
-            'results': [
-                resource_claim
-                for resource_claim in resource_service.get_resources()
-            ]
+            'results':
+            [resource for resource in resource_service.get_resources()]
         },
         default=lambda o: o.__dict__),
                     mimetype='application/json')

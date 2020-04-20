@@ -1,11 +1,11 @@
 from flask import current_app, Blueprint, Response, request
 import json
-from bookbag.services.resources import backendv1_resource_service
+from bookbag.services.resources import rest_resource_service
 blueprint = Blueprint('resources', __name__)
 
 
 def get_resource_service():
-    return backendv1_resource_service.BackendV1ResourceService()
+    return rest_resource_service.RestResourceService()
 
 
 @blueprint.route('/api/resources', methods=(['GET']))

@@ -4,7 +4,7 @@ from bookbag.serializers.resource.backendv1 import serialize
 import json
 
 
-class BackendV1ResourceService(object):
+class RestResourceService(object):
     def __init__(self):
         self.service_token = os.environ.get('OC_SERVICE_TOKEN')
         self.base_url = os.environ.get('OC_API_BASE_URL')

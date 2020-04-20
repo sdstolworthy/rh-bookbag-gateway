@@ -1,13 +1,13 @@
 from flask import current_app, Blueprint, Response
 import json
-from bookbag.services.resource_claims import backendv1_resource_claim_service
+from bookbag.services.resource_claims import rest_resource_claim_service
 
 
 blueprint = Blueprint('resource_claims', __name__)
 
 
 def get_resource_claim_service():
-    return backendv1_resource_claim_service.BackendV1ResourceClaimsService(
+    return rest_resource_claim_service.RestResourceClaimsService(
         current_app.config.get('OC_SERVICE_TOKEN'))
 
 

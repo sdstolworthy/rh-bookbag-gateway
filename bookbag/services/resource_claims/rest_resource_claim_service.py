@@ -3,7 +3,7 @@ import os
 from bookbag.serializers.resource_claims.backendv1 import serialize
 
 
-class BackendV1ResourceClaimsService(object):
+class RestResourceClaimsService(object):
     def __init__(self, token):
         self.service_token = os.environ.get('OC_SERVICE_TOKEN')
         self.base_url = os.environ.get('OC_API_BASE_URL')

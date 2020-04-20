@@ -1,4 +1,4 @@
-from flask import current_app, Blueprint, Response
+from flask import current_app, Blueprint, Response, request
 import json
 from bookbag.services.resources import backendv1_resource_service
 blueprint = Blueprint('resources', __name__)
@@ -12,12 +12,20 @@ def get_resource_service():
 def get_resources():
     resource_service = get_resource_service()
 
-    # TODO: reach out to OC to get req info
-
     return Response(json.dumps(
         {
             'results':
             [resource for resource in resource_service.get_resources()]
         },
         default=lambda o: o.__dict__),
+                    mimetype='application/json')
+
+
+@blueprint.route('/api/resources/<name>', methods=(['PATCH']))
+def modify_desired_resource_state(name):
+    operation = request.get_json()['operation']
+    resource_service = get_resource_service()
+    modified_resource = resource_service.modify_resource_state(name, operation)
+    return Response(json.dumps(modified_resource,
+                               default=lambda o: o.__dict__),
                     mimetype='application/json')

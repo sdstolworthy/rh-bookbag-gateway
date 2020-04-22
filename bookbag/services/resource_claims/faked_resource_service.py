@@ -1,4 +1,4 @@
-from bookbag.models.resource_claim import FakedResourceClaimFactory
+from bookbag.schemas.resource_claim import FakedResourceClaimFactory
 
 class FakedResourceClaimsService(object):
     def __init__(self):

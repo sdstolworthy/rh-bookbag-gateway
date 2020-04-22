@@ -1,4 +1,4 @@
-from bookbag.models.resource_claim import ResourceClaim
+from bookbag.schemas.resource_claim import ResourceClaim
 from bookbag.serializers.resource.backendv1 import serialize as serialize_resource
 
 

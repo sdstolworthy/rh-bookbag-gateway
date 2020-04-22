@@ -6,17 +6,25 @@ class Resource(object):
                  id=None,
                  current_state=None,
                  name="",
+                 tower_jobs=[],
+                 job_vars={},
                  provision_data={},
                  provision_messages=[],
                  governor=None):
         self.provision_messages = provision_messages
         self.name = name
         self.id = id
+        self.job_vars = job_vars
+        self.tower_jobs = tower_jobs
         self.governor = governor
         self.current_state = current_state
         self.provision_data = provision_data
 
     id = ''
+
+    tower_jobs = []
+
+    job_vars = {}
 
     provision_messages = []
 

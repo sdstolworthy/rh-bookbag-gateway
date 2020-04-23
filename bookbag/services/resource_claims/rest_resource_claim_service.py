@@ -18,3 +18,17 @@ class RestResourceClaimsService(object):
         return [
             serialize(resource_claim) for resource_claim in response['items']
         ]
+
+    def delete_resource_claim(self, claim_namespace, claim_name):
+        response = requests.delete(
+            self.base_url +
+            '/apis/poolboy.gpte.redhat.com/v1/namespaces/{namespace}/resourceclaims/{claim_name}'
+            .format_map({
+                'namespace': claim_namespace,
+                'claim_name': claim_name
+            }),
+            verify=False,
+            headers={
+                'Authorization': 'Bearer {}'.format(self.service_token)
+            }).json()
+        return response

@@ -10,9 +10,11 @@ class Resource(object):
                  job_vars={},
                  provision_data={},
                  provision_messages=[],
+                 deletion_timestamp='',
                  governor=None):
         self.provision_messages = provision_messages
         self.name = name
+        self.deletion_timestamp = deletion_timestamp
         self.id = id
         self.job_vars = job_vars
         self.tower_jobs = tower_jobs
@@ -21,6 +23,8 @@ class Resource(object):
         self.provision_data = provision_data
 
     id = ''
+
+    deletion_timestamp = ''
 
     tower_jobs = []
 

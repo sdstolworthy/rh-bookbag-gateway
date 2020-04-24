@@ -11,9 +11,11 @@ class Resource(object):
                  provision_data={},
                  provision_messages=[],
                  deletion_timestamp='',
+                 namespace='',
                  governor=None):
         self.provision_messages = provision_messages
         self.name = name
+        self.namespace = namespace
         self.deletion_timestamp = deletion_timestamp
         self.id = id
         self.job_vars = job_vars
@@ -23,6 +25,8 @@ class Resource(object):
         self.provision_data = provision_data
 
     id = ''
+
+    namespace = ''
 
     deletion_timestamp = ''
 

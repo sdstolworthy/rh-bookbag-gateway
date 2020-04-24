@@ -9,6 +9,7 @@ def serialize(o):
         current_state=o['spec']['vars'].get('current_state'),
         name=o['metadata']['name'],
         job_vars=o['spec']['vars'].get('job_vars'),
+        namespace=o['metadata']['namespace'],
         tower_jobs=o['status'].get('towerJobs')
         if o.get('status') is not None else [],
         deletion_timestamp=o['metadata'].get('deletionTimestamp'),

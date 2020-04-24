@@ -2,6 +2,7 @@ import requests
 import os
 import json
 
+
 class RestCustomObjectApi(object):
     def __init__(self):
         self.service_token = os.environ.get('OC_SERVICE_TOKEN')

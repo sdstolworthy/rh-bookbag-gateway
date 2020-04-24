@@ -1,6 +1,7 @@
 import requests
 import os
 from bookbag.serializers.resource.backendv1 import serialize
+from bookbag.services.action.action_service import RestActionService
 import json
 
 
@@ -8,6 +9,7 @@ class RestResourceService(object):
     def __init__(self):
         self.service_token = os.environ.get('OC_SERVICE_TOKEN')
         self.base_url = os.environ.get('OC_API_BASE_URL')
+        self.action_service = RestActionService()
 
     def get_resources(self):
         response = requests.get(
@@ -19,6 +21,10 @@ class RestResourceService(object):
         return [
             serialize(resource_claim) for resource_claim in response['items']
         ]
+
+    def dispatch_custom_action(self, namespace, subject_name):
+        self.action_service.create_custom_action('custom_action', namespace,
+                                                 subject_name)
 
     def modify_resource_state(self, resource_name, operation):
         patch_action = ''

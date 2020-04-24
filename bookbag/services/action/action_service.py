@@ -1,7 +1,7 @@
 from requests import request
 from bookbag.services.custom_object_service.rest_custom_object_api import RestCustomObjectApi
 
-class BackendV1ActionService(object):
+class RestActionService(object):
     def __init__(self):
         pass
 

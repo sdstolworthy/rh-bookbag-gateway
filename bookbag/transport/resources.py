@@ -21,7 +21,14 @@ def get_resources():
                     mimetype='application/json')
 
 
-@blueprint.route('/api/resources/<name>', methods=(['PATCH']))
+@blueprint.route('/api/resources/dispatch/<namespace>/<name>/<action>',
+                 methods=(['GET']))
+def dispatch_resource_action(namespace, name, action):
+    print('heyo', namespace, name, action)
+    return Response(status=200)
+
+
+@blueprint.route('/api/resources/modify/<name>', methods=(['PATCH']))
 def modify_desired_resource_state(name):
     operation = request.get_json()['operation']
     resource_service = get_resource_service()

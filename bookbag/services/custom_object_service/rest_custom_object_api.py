@@ -10,34 +10,38 @@ class RestCustomObjectApi(object):
 
     def get_namespaced_custom_object(self, api, version, namespace,
                                      object_type, identifier):
-        response = requests.get(
-            self.base_url +
-            '/apis/{api}/{version}/{object_type}/{identifier}'.format_map(
-                {
-                    'api': api,
-                    'version': version,
-                    'object_type': object_type,
-                    'identifier': identifier
-                }),
-            verify=False,
-            headers={
-                'Authorization': 'Bearer {}'.format(self.service_token)
-            }).json()
+        request_url = self.base_url + '/apis/{api}/{version}/namespaces/{namespace}/{object_type}/{identifier}'.format_map(
+            {
+                'api': api,
+                'namespace': namespace,
+                'version': version,
+                'object_type': object_type,
+                'identifier': identifier
+            })
+        response = requests.get(request_url,
+                                verify=False,
+                                headers={
+                                    'Authorization':
+                                    'Bearer {}'.format(self.service_token)
+                                }).json()
         return response
 
     def create_namespaced_custom_object(self, api, version, namespace,
                                         object_type, spec):
-        response = requests.get(
-            self.base_url + '/apis/{api}/{version}/{object_type}'.format_map(
-                {
-                    'api': api,
-                    'version': version,
-                    'object_type': object_type,
-                }),
-            json=json.dumps(spec),
-            verify=False,
-            headers={
-                'Authorization': 'Bearer {}'.format(self.service_token),
-                'Content-Type': 'application/json'
-            }).json()
+        url = self.base_url + '/apis/{api}/{version}/namespaces/{namespace}/{object_type}'.format_map(
+            {
+                'api': api,
+                'namespace': namespace,
+                'version': version,
+                'object_type': object_type,
+            })
+        response = requests.post(url,
+                                 json=spec,
+                                 verify=False,
+                                 headers={
+                                     'Authorization':
+                                     'Bearer {}'.format(self.service_token),
+                                     'Content-Type':
+                                     'application/json'
+                                 }).json()
         return response

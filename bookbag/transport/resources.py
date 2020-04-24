@@ -24,8 +24,12 @@ def get_resources():
 @blueprint.route('/api/resources/dispatch/<namespace>/<name>/<action>',
                  methods=(['GET']))
 def dispatch_resource_action(namespace, name, action):
-    print('heyo', namespace, name, action)
-    return Response(status=200)
+    try:
+        resource_service = get_resource_service()
+        resource_service.dispatch_custom_action(action, namespace, name)
+        return Response(status=200)
+    except:
+        return Response(status=500)
 
 
 @blueprint.route('/api/resources/modify/<name>', methods=(['PATCH']))

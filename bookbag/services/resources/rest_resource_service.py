@@ -22,8 +22,8 @@ class RestResourceService(object):
             serialize(resource_claim) for resource_claim in response['items']
         ]
 
-    def dispatch_custom_action(self, namespace, subject_name):
-        self.action_service.create_custom_action('custom_action', namespace,
+    def dispatch_custom_action(self, action, namespace, subject_name):
+        self.action_service.create_custom_action(action, namespace,
                                                  subject_name)
 
     def modify_resource_state(self, resource_name, operation):
